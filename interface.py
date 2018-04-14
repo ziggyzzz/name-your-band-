@@ -8,9 +8,21 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from flask import Flask, render_template,request
 app = Flask(__name__)
 
-
-
 @app.route('/<artist_name>')
+def find_artists(artist_name):
+    artists = get_artists(artist_name)
+    cleaned_artists = clean_data(artists)
+    return render_template('band.html')
+
+def clean_data(artist_list):
+    data_with_genre = []
+    for item in artist_list:
+        value = item.get('genres')
+        if value:
+            data_with_genre.append(item)
+    return str(data_with_genre)
+
+
 def get_artists(artist_name):
     #so we can call any artist name
     os.environ["SPOTIPY_CLIENT_ID"] = "219a05249bd64963b75f8c7d32e9532c"
@@ -34,8 +46,9 @@ def get_artists(artist_name):
         }
 
         formatted_artists.append(formatted_artist)
-#each artist in list is passed to the webpage formatted as a dictionary
-    return str(formatted_artists)
+    #each artist in list is passed to the webpage formatted as a dictionary
+    return formatted_artists
+
 
 
 
