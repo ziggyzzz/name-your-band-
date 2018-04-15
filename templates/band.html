@@ -4,15 +4,14 @@
     <title>My Webpage</title>
 </head>
 <body>
-    <ul id="navigation">
-    {% for item in navigation %}
-        <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
-    {% endfor %}
-    </ul>
 
-    <h1>My Webpage</h1>
-    {{ a_variable }}
-
-    {# a comment #}
+    <p>Put a word you like!</p>
+        <div id="input a word">
+            <form method="post" action="/userinput">
+                <label for="keyword">keyword:</label>
+                <input type="text" id="keyword" name="keyword" required="required">
+                <input type="submit" value="Submit" id="submit- </form>
+            </form>
+        </div>
 </body>
 </html>
