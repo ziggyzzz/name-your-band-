@@ -1,12 +1,18 @@
 import os
 from operator import itemgetter
-import matplotlib.pyplot as plt
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 from flask import Flask, render_template,request
 app = Flask(__name__)
+
+
+@app.route("/<userinput>", methods=["POST"])
+def userinput():
+    form_data = request.form
+    print form_data["keyword"]
+    return render_template('band.html')
 
 @app.route('/<artist_name>')
 def find_artists(artist_name):
@@ -31,10 +37,10 @@ def get_artists(artist_name):
     client_credentials_manager = SpotifyClientCredentials()
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-    response = sp.search(q=artist_name, limit=10, offset=0, type='artist', market='US')
+    response = sp.search(q=artist_name, limit=20, offset=0, type='artist', market='US')
     artists = response['artists']['items']
 
-    artists = sorted(artists, key=itemgetter('popularity'), reverse=True)
+    artists = sorted(artists, key=itemgetter('popularity','genres'), reverse=True)
     #sort dictionary artists using itemgetter which uses popularity as sorting key
 
     formatted_artists = []
@@ -42,7 +48,8 @@ def get_artists(artist_name):
     for artist in artists:
         formatted_artist = {
             'name': artist['name'],
-            'popularity': artist['popularity'],
+            'genres': artist['genres'],
+            'popularity':artist['popularity']
         }
 
         formatted_artists.append(formatted_artist)
