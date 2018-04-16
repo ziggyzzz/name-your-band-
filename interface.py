@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 
 
+#Linking to 2 new html files using jinja2 syntax
 
 @app.route('/')
 def index():
