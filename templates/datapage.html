@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block heading %}
+    Insights
+{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for artists in cleaned_artists %}
+        <li> {{ artists }} </li>
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}

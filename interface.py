@@ -4,30 +4,22 @@ from operator import itemgetter
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,url_for
 app = Flask(__name__)
 
 
-@app.route("/<userinput>", methods=["POST"])
-def userinput():
-    form_data = request.form
-    print form_data["keyword"]
-    return render_template('band.html')
 
-@app.route('/<artist_name>')
-def find_artists(artist_name):
-    artists = get_artists(artist_name)
-    cleaned_artists = clean_data(artists)
-    return render_template('band.html')
 
-def clean_data(artist_list):
-    data_with_genre = []
-    for item in artist_list:
-        value = item.get('genres')
-        if value:
-            data_with_genre.append(item)
-    return str(data_with_genre)
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+@app.route('/keyword', methods=['POST'])
+def list_artists():
+    artist_name = request.form.get('artist_name')
+    dirty_artists = get_artists(artist_name)
+    cleaned_artists = clean_data(dirty_artists)
+    return render_template('datapage.html', cleaned_artists=cleaned_artists)
 
 def get_artists(artist_name):
     #so we can call any artist name
@@ -56,6 +48,13 @@ def get_artists(artist_name):
     #each artist in list is passed to the webpage formatted as a dictionary
     return formatted_artists
 
+def clean_data(artist_list):
+    data_with_genre = []
+    for item in artist_list:
+        value = item.get('genres')
+        if value:
+            data_with_genre.append(item)
+    return str(data_with_genre)
 
 
 
