@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <!--I used the jinja2 syntax to make the input of users directly act on the list_artists() function -->
+    <!--I used the jinja2 syntax to make the input of users directly act on the list_artists() function. -->
     <form action='{{ url_for("list_artists") }}' method="post">
         <input type="text" name="artist_name" id='Enter a keyword' placeholder="Enter a keyword">
         <button>Submit</button>
