@@ -1,14 +1,13 @@
 {% extends 'layout.html' %}
 {% block heading %}
-    Name your band
+Name your band
 {% endblock %}
-
 {% block body %}
-    <!--I used the jinja2 syntax to make the input of users directly act on the list_artists() function. -->
-    <div class="form">
-    <form action='{{ url_for("list_artists") }}' method="post">
-        <input type="text" name="artist_name" id='Enter a keyword' placeholder="Enter a keyword">
-        <button>Submit</button>
-    </form>
-    </div>
+<!--I used the jinja2 syntax to make the input of users directly act on the list_artists() function. -->
+<div class="form">
+   <form action='{{ url_for("list_artists") }}' method="post">
+      <input type="text" name="artist_name" id='Enter a keyword' placeholder="Enter a keyword">
+      <button>Submit</button>
+   </form>
+</div>
 {% endblock %}

@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Name Your Band</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
-        <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
-    </head>
-    <body>
-    <body style="background-color: #5CD960;">
-     <a href="https://open.spotify.com/browse" class="pull-left"><img src="/static/images/logospotify.png"></a>
-    <div class="container">
-    <h1>{% block heading %} {% endblock %}
-    {% block body %}
-    {% endblock %}
-    </h1>
-        <h1 style ="color: #000000;">
-    </div>
-    </body>
+   <head>
+      <meta charset="UTF-8">
+      <title>Name Your Band</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
+      <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+   </head>
+   <body>
+      <body style="background-color: #5CD960;">
+         <a href="https://open.spotify.com/browse" class="pull-left"><img src="/static/images/logospotify.png"></a>
+         <div class="container">
+            <h1>{% block heading %} {% endblock %}
+               {% block body %}
+               {% endblock %}
+            </h1>
+            <h1 style ="color: #000000;">
+         </div>
+   </body>
 </html>
-
-    <!--Makes easier if we have several pages of similar layout... -->
+<!--Makes easier if we have several pages of similar layout... -->
