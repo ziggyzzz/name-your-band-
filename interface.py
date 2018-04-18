@@ -1,13 +1,18 @@
 import os
 from operator import itemgetter
 
+#from termcolor import colored
+
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 from flask import Flask, render_template,request,url_for
 app = Flask(__name__)
 
+#import pandas
 
+
+#import tabulate
 
 #Linking to 2 new html files using jinja2 syntax.
 
@@ -20,7 +25,28 @@ def list_artists():
     artist_name = request.form.get('artist_name')
     dirty_artists = get_artists(artist_name)
     cleaned_artists = clean_data(dirty_artists)
-    return render_template('datapage.html', cleaned_artists=cleaned_artists)
+    names = []
+    popularity = []
+    genre = []
+    for x in cleaned_artists:
+        name_to_append = x.get('name')
+        popularity_to_append = x.get('popularity')
+        genre_to_append = x.get('genre')
+        names.append(name_to_append)
+        popularity.append(popularity_to_append)
+        genre.append(genre_to_append)
+
+    return line_chart(popularity,names,'popularity of aritsts')
+
+
+
+   # return render_template('datapage.html', cleaned_artists=cleaned_artists)
+
+def line_chart(value, label,legend):
+    return render_template('line_chart.html', values=value, labels=label, legend=legend)
+
+
+
 
 def get_artists(artist_name):
     #so we can call any artist name
@@ -30,7 +56,7 @@ def get_artists(artist_name):
     client_credentials_manager = SpotifyClientCredentials()
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-    response = sp.search(q=artist_name, limit=20, offset=0, type='artist', market='US')
+    response = sp.search(q=artist_name, limit=50, offset=0, type='artist', market='US')
     artists = response['artists']['items']
 
     artists = sorted(artists, key=itemgetter('popularity','genres'), reverse=True)
@@ -55,6 +81,6 @@ def clean_data(artist_list):
         value = item.get('genres')
         if value:
             data_with_genre.append(item)
-    return str(data_with_genre)
+    return data_with_genre
 
 app.run(debug=True)
