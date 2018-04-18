@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
-
+<head>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
 {% block heading %}
-    Insights
+Insights
 {% endblock %}
-
 {% block body %}
-    <ul>
-        {% for artists in cleaned_artists %}
-        <li> {{ artists }} </li>
-        {% endfor %}
-    </ul>
-    <!--The presentation of data doesn't look neat. It needs some sorting out.. -->
-
+<ul>
+   {% for artists in cleaned_artists %}
+   <li> {{ artists }} </li>
+   {% endfor %}
+</ul>
+<!--The presentation of data doesn't look neat. It needs some sorting out.. -->
 {% endblock %}
