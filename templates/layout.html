@@ -3,12 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>Name Your Band</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
     </head>
     <body>
+    <body style="background-color: #6cff5e;">
+    <div class="container">
     <h1>{% block heading %} {% endblock %}
     {% block body %}
     {% endblock %}
     </h1>
+        <h1 style ="color: #000000;">
+    </div>
     </body>
 </html>
 

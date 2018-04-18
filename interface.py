@@ -57,6 +57,4 @@ def clean_data(artist_list):
             data_with_genre.append(item)
     return str(data_with_genre)
 
-
-
 app.run(debug=True)
